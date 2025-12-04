@@ -1,5 +1,6 @@
 const ship = require("./Modules/ship");
 const gameboard = require("./Modules/gameboard");
+const player = require("./Modules/player");
 
 test("Ship object", () => {
   const testShip = new ship.Ship(3)
@@ -78,5 +79,17 @@ test("Gameboard object", () => {
   expect(testBoard.ships[2].isSunk()).toBeTruthy()
   expect(testBoard.sunkShips).toBe(3)
   expect(testBoard.isGameOver).toBeTruthy()
+})
 
+test("Player object", () => {
+  const realPlayer = new player.Player("real", new gameboard.Gameboard())
+  const computerPlayer = new player.Player("computer", new gameboard.Gameboard())
+
+  expect(realPlayer.type).toBe("real")
+  expect(computerPlayer.type).toBe("computer")
+  expect(realPlayer.gameboard.width).toBe(10)
+  expect(realPlayer.gameboard.height).toBe(10)
+  expect(realPlayer.gameboard.grid[0][0]).toBeNull()
+  expect(realPlayer.gameboard.grid[5][5]).toBeNull()
+  expect(realPlayer.gameboard.grid[9][9]).toBeNull()
 })
