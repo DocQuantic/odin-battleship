@@ -3,5 +3,6 @@ export default class Player{
         this.type=type;
         this.gameboard = gameboard
         this.name=name
+        this.isCurrentPlayer = false;
     }
 }

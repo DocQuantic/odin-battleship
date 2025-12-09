@@ -29,15 +29,19 @@ export default class Gameboard{
     }
 
     receiveAttack(pos){
+        let hitStatus = false
         if(this.grid[pos[0]][pos[1]] !== null & this.grid[pos[0]][pos[1]] !== 0 & this.grid[pos[0]][pos[1]] !== 1){
             const ship = this.grid[pos[0]][pos[1]]
             ship.hit()
             this.grid[pos[0]][pos[1]] = 1
+            hitStatus = true
         }else{
             this.grid[pos[0]][pos[1]] = 0
+            hitStatus = false
         }
 
         this.checkShipsStatus()
+        return hitStatus
     }
 
     checkShipsStatus(){

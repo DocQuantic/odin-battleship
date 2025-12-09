@@ -9,6 +9,8 @@ const players = {
     player2: new Player("real", "2", new Gameboard())
 }
 
+players.player1.isCurrentPlayer = true;
+
 populateBoards()
 initializeUI(players)
 

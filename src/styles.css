@@ -171,7 +171,7 @@ main{
 }
 
 .cell{
-    font-size: 10vw;
+    font-size: 1vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -192,6 +192,7 @@ main{
 }
 
 .hit{
+    background-color: var(--medium-purple);
     color: var(--dark-purple);
     text-shadow: 0 0 10px var(--dark-purple);
 }
