@@ -186,9 +186,19 @@ main{
     text-shadow: 0 0 10px var(--light-pink-transp);
 }
 
-.played{
+.empty{
     color: var(--light-pink);
     text-shadow: 0 0 10px var(--light-pink);
+}
+
+.hit{
+    color: var(--dark-purple);
+    text-shadow: 0 0 10px var(--dark-purple);
+}
+
+.ship{
+    background-color: var(--medium-purple);
+    text-shadow: 0 0 10px var(--medium-purple);
 }
 
 .scores,
@@ -234,3 +244,5 @@ main{
 .sep{
     justify-self: center;
 }
+
+

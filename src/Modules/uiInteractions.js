@@ -1,7 +1,7 @@
-export function initializeUI(){
+export function initializeUI(players){
     const gameBoard = document.querySelector(".game-board");
-    const board1 = createBoard("1")
-    const board2 = createBoard("2")
+    const board1 = createBoard(players.player1)
+    const board2 = createBoard(players.player2)
     
     gameBoard.appendChild(board1)
     gameBoard.appendChild(board2)
@@ -9,15 +9,28 @@ export function initializeUI(){
 
 
 function createBoard(player){
-const board = document.createElement("div")
-board.classList.add("board")
-board.setAttribute("player", player)
+    const board = document.createElement("div")
+    board.classList.add("board")
+    board.setAttribute("id", player.name)
 
     for(let i=0; i<10; i++){
         for(let j=0; j<10; j++){
             const cell = document.createElement("div");
+            switch(player.gameboard.grid[i][j]){
+                case null:
+                    cell.classList.add("unplayed");
+                    break
+                case 0:
+                    cell.classList.add("empty");
+                    break;
+                case 1:
+                    cell.classList.add("hit");
+                    break;
+                default:
+                    cell.classList.add("ship");
+                    break
+            }
             cell.classList.add("cell");
-            cell.classList.add("unplayed");
             cell.setAttribute("id", `${i}-${j}`);
     /* 
             cell.addEventListener("mouseenter", () => {
