@@ -6,14 +6,13 @@ import { initializeUI } from "./Modules/uiInteractions";
 
 const players = {
     player1: new Player("real", "1", new Gameboard()),
-    player2: new Player("real", "2", new Gameboard())
+    player2: new Player("computer", "2", new Gameboard())
 }
 
 players.player1.isCurrentPlayer = true;
 
 populateBoards()
 initializeUI(players)
-
 
 function populateBoards(){
     const board1 = players.player1.gameboard;

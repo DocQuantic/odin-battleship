@@ -110,14 +110,35 @@ function changeTurn(){
         gamePlayers.player2.isCurrentPlayer = false
     }
 
-    let gameBoard = document.querySelector(".game-board");
-    
-    gameBoard.removeChild(gameBoard.childNodes[2])
-    gameBoard.removeChild(gameBoard.childNodes[1])
+    if(gamePlayers.player2.isCurrentPlayer & gamePlayers.player2.type === "computer"){
+        let col = Math.floor(Math.random() * 10)
+        let row = Math.floor(Math.random() * 10)
 
-    const board1 = renderBoard(gamePlayers.player1)
-    const board2 = renderBoard(gamePlayers.player2) 
-    
-    gameBoard.appendChild(board1)
-    gameBoard.appendChild(board2)
+        if(gamePlayers.player1.gameboard.grid[row][col] !== 1){
+            gamePlayers.player1.gameboard.receiveAttack([row, col])
+        }
+        else {
+            while(gamePlayers.player1.gameboard.grid[row][col] === 1){
+                col = Math.floor(Math.random() * 10)
+                row = Math.floor(Math.random() * 10)
+
+                gamePlayers.player1.gameboard.receiveAttack([row, col])
+            }
+        }
+
+        changeTurn()
+        return
+    }
+    else {
+        let gameBoard = document.querySelector(".game-board");
+        
+        gameBoard.removeChild(gameBoard.childNodes[2])
+        gameBoard.removeChild(gameBoard.childNodes[1])
+
+        const board1 = renderBoard(gamePlayers.player1)
+        const board2 = renderBoard(gamePlayers.player2) 
+        
+        gameBoard.appendChild(board1)
+        gameBoard.appendChild(board2)
+    }
 }
