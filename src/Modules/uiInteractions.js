@@ -1,4 +1,5 @@
 let gamePlayers = undefined
+let winner = undefined
 
 export function initializeUI(players){
     gamePlayers = players
@@ -63,18 +64,18 @@ function renderBoard(player){
                 cell.setAttribute("id", `${i}-${j}`);
 
                 cell.addEventListener("mouseenter", () => {
-                    if(cell.classList[0] === "unplayed"){
+                    if(cell.classList[0] === "unplayed" & winner === undefined){
                         cell.innerText = "X";
                     }
                     })
                 cell.addEventListener("mouseleave", () => {
-                    if(cell.classList[0] === "unplayed"){
+                    if(cell.classList[0] === "unplayed" & winner === undefined){
                         cell.innerText = "";
                     }
                     })
                 
                 cell.addEventListener("click", () => {
-                    if(cell.classList[0] === "unplayed"){
+                    if(cell.classList[0] === "unplayed" & winner === undefined){
                         const cellId = cell.getAttribute("id");
                         const cellRow = Number(cellId[0]);
                         const cellCol = Number(cellId[2]);
@@ -83,14 +84,6 @@ function renderBoard(player){
                         cell.classList.remove("unplayed");
                         isHit ? cell.classList.add("hit") : cell.classList.add("empty");
                         changeTurn()
-
-                        /* if(gameManager.getGameOver()){
-                            const winner = gameManager.getWinner();
-                            showGameOver(winner);
-                            if(winner !== null){
-                                updatePlayerScore(winner);
-                            }
-                        } */
                     }
                 }) 
                 board.appendChild(cell);
@@ -101,44 +94,63 @@ function renderBoard(player){
 }
 
 function changeTurn(){
-    if(gamePlayers.player1.isCurrentPlayer){
-        gamePlayers.player1.isCurrentPlayer = false
-        gamePlayers.player2.isCurrentPlayer = true
+    if(gamePlayers.player1.gameboard.isGameOver){
+        winner = gamePlayers.player1
+        showGameOver(1);
+    }
+    else if(gamePlayers.player2.gameboard.isGameOver){
+        winner = gamePlayers.player1
+        showGameOver(2);
     }
     else {
-        gamePlayers.player1.isCurrentPlayer = true
-        gamePlayers.player2.isCurrentPlayer = false
-    }
-
-    if(gamePlayers.player2.isCurrentPlayer & gamePlayers.player2.type === "computer"){
-        let col = Math.floor(Math.random() * 10)
-        let row = Math.floor(Math.random() * 10)
-
-        if(gamePlayers.player1.gameboard.grid[row][col] !== 1){
-            gamePlayers.player1.gameboard.receiveAttack([row, col])
+        if(gamePlayers.player1.isCurrentPlayer){
+            gamePlayers.player1.isCurrentPlayer = false
+            gamePlayers.player2.isCurrentPlayer = true
         }
         else {
-            while(gamePlayers.player1.gameboard.grid[row][col] === 1){
-                col = Math.floor(Math.random() * 10)
-                row = Math.floor(Math.random() * 10)
-
-                gamePlayers.player1.gameboard.receiveAttack([row, col])
-            }
+            gamePlayers.player1.isCurrentPlayer = true
+            gamePlayers.player2.isCurrentPlayer = false
         }
 
-        changeTurn()
-        return
-    }
-    else {
-        let gameBoard = document.querySelector(".game-board");
-        
-        gameBoard.removeChild(gameBoard.childNodes[2])
-        gameBoard.removeChild(gameBoard.childNodes[1])
+        if(gamePlayers.player2.isCurrentPlayer & gamePlayers.player2.type === "computer"){
+            let col = Math.floor(Math.random() * 10)
+            let row = Math.floor(Math.random() * 10)
 
-        const board1 = renderBoard(gamePlayers.player1)
-        const board2 = renderBoard(gamePlayers.player2) 
-        
-        gameBoard.appendChild(board1)
-        gameBoard.appendChild(board2)
+            if(gamePlayers.player1.gameboard.grid[row][col] !== 1){
+                gamePlayers.player1.gameboard.receiveAttack([row, col])
+            }
+            else {
+                while(gamePlayers.player1.gameboard.grid[row][col] === 1){
+                    col = Math.floor(Math.random() * 10)
+                    row = Math.floor(Math.random() * 10)
+
+                    gamePlayers.player1.gameboard.receiveAttack([row, col])
+                }
+            }
+
+            changeTurn()
+            return
+        }
+        else {
+            let gameBoard = document.querySelector(".game-board");
+            
+            gameBoard.removeChild(gameBoard.childNodes[2])
+            gameBoard.removeChild(gameBoard.childNodes[1])
+
+            const board1 = renderBoard(gamePlayers.player1)
+            const board2 = renderBoard(gamePlayers.player2) 
+            
+            gameBoard.appendChild(board1)
+            gameBoard.appendChild(board2)
+        }
     }
+}
+
+function showGameOver(player){
+    const gameOverElement = document.querySelector("#game-over");
+
+    gameOverElement.innerText = `Congratulations! Player ${player} won the game.`
+
+    gameOverElement.classList.remove("game-not-over");
+    gameOverElement.classList.add("game-over");
 }

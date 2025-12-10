@@ -202,7 +202,6 @@ main{
     text-shadow: 0 0 10px var(--medium-purple);
 }
 
-.scores,
 #game-over{
     color: var(--yellow);
     text-shadow: 0 0 3px var(--yellow);
@@ -217,25 +216,6 @@ main{
 .game-over{
     opacity: 1;
     cursor: text;
-}
-
-.scores{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, min-content);
-}
-
-.scores > h2{
-    grid-column: 1/-1;
-    justify-self: center;
-    margin-bottom: 0.5em;
-}
-
-.player{
-    display: flex;
-    > p + p{
-        margin-left: 0.3em;
-    }
 }
 
 .p2{
