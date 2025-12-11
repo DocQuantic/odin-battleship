@@ -9,35 +9,22 @@ const players = {
     player2: new Player("computer", "2", new Gameboard())
 }
 
-players.player1.isCurrentPlayer = true;
+players.player1.isCurrentPlayer = true
 
-populateBoards()
+populateComputerBoard()
 initializeUI(players)
 
-function populateBoards(){
-    const board1 = players.player1.gameboard;
+function populateComputerBoard(){    
+    const board = players.player2.gameboard;
 
-    board1.placeShip(new Ship(1), [0,1], "x")
-    board1.placeShip(new Ship(1), [2,1], "x")
-    board1.placeShip(new Ship(1), [7,2], "x")
-    board1.placeShip(new Ship(1), [3,7], "x")
-    board1.placeShip(new Ship(2), [1,3], "x")
-    board1.placeShip(new Ship(2), [4,1], "x")
-    board1.placeShip(new Ship(2), [8,8], "y")
-    board1.placeShip(new Ship(3), [7,0], "y")
-    board1.placeShip(new Ship(3), [1,9], "y")
-    board1.placeShip(new Ship(4), [6,5], "x")
-    
-    const board2 = players.player2.gameboard;
-
-    board2.placeShip(new Ship(1), [0,1], "x")
-    board2.placeShip(new Ship(1), [2,1], "x")
-    board2.placeShip(new Ship(1), [7,2], "x")
-    board2.placeShip(new Ship(1), [3,7], "x")
-    board2.placeShip(new Ship(2), [1,3], "x")
-    board2.placeShip(new Ship(2), [4,1], "x")
-    board2.placeShip(new Ship(2), [8,8], "y")
-    board2.placeShip(new Ship(3), [7,0], "y")
-    board2.placeShip(new Ship(3), [1,9], "y")
-    board2.placeShip(new Ship(4), [6,5], "x")
+    board.placeShip(new Ship(1), [0,1], "x")
+    board.placeShip(new Ship(1), [2,1], "x")
+    board.placeShip(new Ship(1), [7,2], "x")
+    board.placeShip(new Ship(1), [3,7], "x")
+    board.placeShip(new Ship(2), [1,3], "x")
+    board.placeShip(new Ship(2), [4,1], "x")
+    board.placeShip(new Ship(2), [8,8], "y")
+    board.placeShip(new Ship(3), [7,0], "y")
+    board.placeShip(new Ship(3), [1,9], "y")
+    board.placeShip(new Ship(4), [6,5], "x")
 }

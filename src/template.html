@@ -6,35 +6,39 @@
 </head>
 
 <body>
-
-    <!-- <div class="modal-container dialog flex">
-        <div>
-            <h2>Choose player names</h2>
-            <form action="POST">
-                <ul>
-                    <li>
-                        <label for="player1">Player 1 (L)</label>
-                        <input type="text" id="player1" name="player1" placeholder="Player 1" required>
-                    </li>
-                    <li>
-                        <label for="player2">Player 2 (R)</label>
-                        <input type="text" id="player2" name="player2" placeholder="Player 2" required>
-                    </li>
-                </ul>
-                <button type="submit" id="dialog-btn">Ok</button>
-            </form>
-        </div>
-    </div> -->
     <div class="modal-container main">
         <header>
             <div class="empty"></div>
             <h1>Battleship Game !</h1>
-            <div class="buttons">
-                <button type="button" id="reset-btn">Reset</button>
-                <button type="button" id="new-game-btn">New Game</button>
-            </div>
         </header>
         <main>
+            <div class="placement-board flex">
+                <div class="flexcol">
+                    <label for="ships">Ship:</label>
+
+                    <select name="ships" id="ships">
+                        <option value="carrier">Carrier</option>
+                        <option value="battleship">Battleship</option>
+                        <option value="cruiser">Cruiser</option>
+                        <option value="submarine">Submarine</option>
+                        <option value="destroyer">Destroyer</option>
+                    </select>
+                </div>
+                <div class="flexcol">
+                    <label for="coord">Coordinate:</label>
+
+                    <input id="coord" type="text" maxlength="2">
+                </div>
+                <div class="flexcol">
+                    <label for="orient">Orientation:</label>
+
+                    <select name="orient" id="orient">
+                        <option value="horizontal">Horizontal</option>
+                        <option value="vertical">Vertical</option>
+                    </select>
+                </div>
+                <button id="place-btn">Place Ship</button>
+            </div>
             <div class="game-board">
         
             </div>
